@@ -11,7 +11,7 @@ WORKDIR /home/eircode/
 
 USER eircode
 
-ADD target/eircode-1.1.1.jar eircode.jar
+ADD target/eircode-1.1.3.jar eircode.jar
 
 EXPOSE 8080
 
