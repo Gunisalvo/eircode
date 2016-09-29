@@ -15,5 +15,7 @@ ADD target/eircode-1.1.1.jar eircode.jar
 
 ADD src/main/resources/application-alliescomputing.properties conf/application.properties
 
+EXPOSE 8080
+
 CMD java -jar eircode.jar --spring.config.location=file:conf/application.properties --spring.profiles.active=alliescomputing
 
