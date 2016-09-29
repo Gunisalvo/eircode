@@ -56,5 +56,5 @@ docker build -t flexco/eircode .
 Like on the running section it is important to externalize the configuration files in order to have a more flexible deployment. In order to accomplish this we can link an external directory with the configuration file with the **-v** flag.
 
 ```
-docker run -i -t -p 8080:8080 -v /path/to/your/env/conf:/home/eircode/conf flexco/eircode:latest
+docker run -i -t -p 8080:8080 -v /path/to/your/env/config/override/directory:/home/eircode/config flexco/eircode:latest
 ```
