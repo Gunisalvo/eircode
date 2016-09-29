@@ -21,10 +21,12 @@ public class CodeValidator {
     }
 
     public boolean validateEirCode(String eirCode){
+        if(eirCode == null) return false;
         return this.eirCodeRegex.matcher(eirCode).matches();
     }
 
     public boolean validatePostalCode(String postalCode){
+        if(postalCode == null) return false;
         return this.postalCodeRegex.matcher(postalCode).matches();
     }
 }

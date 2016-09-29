@@ -3,6 +3,7 @@ package com.fexco.eircode.api;
 import com.fexco.eircode.validator.CodeValidator;
 import com.fexco.eircode.adapter.ApiAdapter;
 
+import io.swagger.annotations.*;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,12 +17,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/v1")
+@Api(description = "Forwards HTTP Requests to configured APIs")
 public class ApiForward {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -47,7 +50,16 @@ public class ApiForward {
     private RestTemplate restTemplate = new RestTemplate();
 
     @RequestMapping(value = "/api-forward/**", method = RequestMethod.GET)
-    public ResponseEntity forwardRequest(@Autowired HttpServletRequest request) {
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "urlSuffix", value = "Terminating part of the URL that will be forwarded to the API", required = true, dataType = "string", paramType = "path")
+    })
+    @ApiOperation(value = "Forward Request", notes = "Forwards the URL to the configured API. NOTE: due to the dynamic nature of the URL construction this method cannot be tested by this GUI", response = String.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success", response = String.class),
+            @ApiResponse(code = 403, message = "Forbidden"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Failure")})
+    public ResponseEntity forwardRequest(@ApiIgnore @Autowired HttpServletRequest request) {
         String uri = request.getRequestURI();
         logger.info("Forwarding: {}", request.getRequestURL().toString());
         String parameters = request.getQueryString();
@@ -63,7 +75,16 @@ public class ApiForward {
     }
 
     @RequestMapping(value = "/ie/{eirCode}", method = RequestMethod.GET)
-    public ResponseEntity lookupEirCode(@PathVariable("eirCode") String eirCode, @Autowired HttpServletRequest request) {
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "eirCode", value = "Postal Code of the Republic of Ireland", required = true, dataType = "string", paramType = "path")
+    })
+    @ApiOperation(value = "Lookup EIRCODE", notes = "Forwards the URL mapped EIRCODEs to the configured API", response = String.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 403, message = "Forbidden"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Failure")})
+    public ResponseEntity lookupEirCode(@PathVariable("eirCode") String eirCode, @ApiIgnore @Autowired HttpServletRequest request) {
         logger.info("Looking up EIR Code: {}", eirCode);
         if(!this.validator.validateEirCode(eirCode)){
             throw new IllegalArgumentException("Bad EIR Code: " + eirCode);
@@ -79,7 +100,16 @@ public class ApiForward {
     }
 
     @RequestMapping(value = "/uk/{postalCode}", method = RequestMethod.GET)
-    public ResponseEntity lookupPostalCode(@PathVariable("postalCode") String postalCode, @Autowired HttpServletRequest request) {
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "postalCode", value = "Postal Code of the United Kingdom", required = true, dataType = "string", paramType = "path")
+    })
+    @ApiOperation(value = "Lookup POSTAL CODE", notes = "Forwards the URL mapped UK's postal codes to the configured API", response = String.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 403, message = "Forbidden"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Failure")})
+    public ResponseEntity lookupPostalCode(@PathVariable("postalCode") String postalCode, @ApiIgnore @Autowired HttpServletRequest request) {
         logger.info("Looking up Postal Code: {}", postalCode);
         if(!this.validator.validatePostalCode(postalCode)){
             throw new IllegalArgumentException("Bad POSTAL Code: " + postalCode);
@@ -96,6 +126,10 @@ public class ApiForward {
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     @ResponseBody
+    @ApiOperation(value = "Information", notes = "Retrieves relevant information about the application", response = String.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 500, message = "Failure")})
     public Map<String,String> info(){
         logger.info("Retrieving app info");
         Map<String,String> info = new HashMap<>();
