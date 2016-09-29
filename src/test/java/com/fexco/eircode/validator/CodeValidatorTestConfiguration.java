@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@ComponentScan(basePackages = {"com.flexco.eircode.validator"})
+@ComponentScan(basePackages = {"com.fexco.eircode.validator"})
 @PropertySource("classpath:/application.properties")
 public class CodeValidatorTestConfiguration {
 }
