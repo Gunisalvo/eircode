@@ -1,4 +1,4 @@
-package com.flexco.eircode.adapter;
+package com.fexco.eircode.adapter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

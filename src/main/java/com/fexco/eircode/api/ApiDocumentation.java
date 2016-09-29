@@ -1,4 +1,4 @@
-package com.flexco.eircode.api;
+package com.fexco.eircode.api;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

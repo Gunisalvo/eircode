@@ -1,4 +1,4 @@
-package com.flexco.eircode;
+package com.fexco.eircode;
 
 
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +15,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 
 @EnableAutoConfiguration
-@ComponentScan("com.flexco.eircode")
+@ComponentScan("com.fexco.eircode")
 @EnableCaching
 public class EircodeApp {
 

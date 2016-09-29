@@ -1,8 +1,8 @@
-package com.flexco.eircode.api;
+package com.fexco.eircode.api;
 
-import com.flexco.eircode.adapter.ApiAdapter;
+import com.fexco.eircode.validator.CodeValidator;
+import com.fexco.eircode.adapter.ApiAdapter;
 
-import com.flexco.eircode.validator.CodeValidator;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

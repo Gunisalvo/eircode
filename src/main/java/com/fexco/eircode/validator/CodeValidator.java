@@ -1,4 +1,4 @@
-package com.flexco.eircode.validator;
+package com.fexco.eircode.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

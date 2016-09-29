@@ -1,4 +1,4 @@
-package com.flexco.eircode.adapter;
+package com.fexco.eircode.adapter;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
