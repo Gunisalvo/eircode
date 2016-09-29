@@ -17,14 +17,42 @@ public class CodeValidatorTest {
     private CodeValidator validator;
 
     @Test
+    public void mustRejectNullEircode() throws Exception {
+        Assert.assertFalse(validator.validateEirCode(null));
+    }
+
+    @Test
+    public void mustRejectEmptyEircode() throws Exception {
+        Assert.assertFalse(validator.validateEirCode(""));
+    }
+
+    @Test
+    public void mustRejectInvalidEircode() throws Exception {
+        Assert.assertFalse(validator.validateEirCode("1234ABCD"));
+    }
+
+    @Test
     public void mustValidateEircode() throws Exception {
-        Assert.assertFalse(validator.validateEirCode("banana"));
         Assert.assertTrue(validator.validateEirCode("D02X285"));
     }
 
     @Test
+    public void mustRejectNullPostalCode() throws Exception {
+        Assert.assertFalse(validator.validatePostalCode(null));
+    }
+
+    @Test
+    public void mustRejectEmptyPostalCode() throws Exception {
+        Assert.assertFalse(validator.validatePostalCode(""));
+    }
+
+    @Test
+    public void mustRejectInvalidPostalCode() throws Exception {
+        Assert.assertFalse(validator.validatePostalCode("codigo postal"));
+    }
+
+    @Test
     public void mustValidatePostalCode() throws Exception {
-        Assert.assertFalse(validator.validatePostalCode("banana"));
         Assert.assertTrue(validator.validatePostalCode("NR147PZ"));
     }
 }
