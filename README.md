@@ -37,6 +37,8 @@ http://localhost:8080/swagger-ui.html
 
 ### Packaging
 
+The **Dockefile** looks for the java artifact on the standard maven project build directory (**target/**). A standard maven package is command is all that is needed. 
+
 ```
 mvn package
 ```
