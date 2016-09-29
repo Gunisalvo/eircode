@@ -15,7 +15,7 @@
 mvn clean install
 ```
 
-### Running
+### Starting the Application
 
 The idea is letting the micro service leverage Spring's dependency injection by selecting a profile tied to an implementation. For the initial use case the calls can be forwarded to the Allies Computing API with: 
 
@@ -32,6 +32,8 @@ mvn spring-boot:run -Dspring.profiles.active=mock
 Bear in mind that you need to update the configuration files on the **src/main/resources/application-{spring.profiles.active}.properties** or provide them on the command line (like using **--Dspring.config.location** and providing an externalized source).
 
 ### Swagger API testing
+
+After starting the application, the API can be inspected and tested at:
 
 http://localhost:8080/swagger-ui.html
 
